@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 
 const useTimer = (initialState = 1500) => {
@@ -7,16 +7,25 @@ const useTimer = (initialState = 1500) => {
   const [isPaused, setIsPaused] = useState(false)
   const increment = useRef(null)
 
+  const decrementTimer = () => {
+    increment.current = setInterval(() => {
+      setTimer((timer) => timer - 1)
+    }, 1000)
+  }
+
   const handleStart = () => {
     setIsActive(true)
     setIsPaused(true)
-    increment.current = setInterval(() => {
-      if (timer > 0) {
-        console.log('timer ==>', timer)
-        setTimer((timer) => timer - 1)
-      }
-    }, 1000)
+    decrementTimer()
   }
+
+  useEffect(() => {
+    console.log('handleStart calls ==>', timer)
+    if (timer <= 0) {
+      clearInterval(increment.current)
+      setTimer(0)
+    }
+  }, [timer])
 
   const handlePause = () => {
     clearInterval(increment.current)
@@ -25,11 +34,7 @@ const useTimer = (initialState = 1500) => {
 
   const handleResume = () => {
     setIsPaused(true)
-    if (timer >= 0) {
-      increment.current = setInterval(() => {
-        setTimer((timer) => timer - 1)
-      }, 1000)
-    }
+    decrementTimer()
   }
 
   const handleReset = () => {

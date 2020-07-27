@@ -1,14 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
 
 body {
   margin: 0;
   font-family: "Quicksand", sans-serif;
-  background-color: #eceff1;
+  /* background-color: #eceff1; */
+  background-color: #38444c;
   color: #010b40;
 }
 
 .app {
-  background-color: #0e4d92;
+  /* background-color: #0e4d92; */
+  background-color: #38444c;
   margin: 0 auto;
   width: 300px;
   height: 200px;
@@ -26,6 +29,7 @@ h3 {
 
 p {
   font-size: 28px;
+  font-family: "Special Elite", cursive;
 }
 
 .stopwatch-card {
@@ -43,10 +47,10 @@ p {
 button {
   outline: none;
   background: transparent;
-  border: 1px solid blue;
+  border: 1px solid #fff;
   padding: 5px 10px;
   border-radius: 7px;
-  color: blue;
+  color: #fff;
   cursor: pointer;
 }
 
@@ -56,4 +60,25 @@ button {
   width: 150px;
   margin: 0 auto;
   margin-top: 5px;
+}
+
+.svg {
+  display: block;
+  margin: 20px auto;
+  max-width: 100%;
+}
+
+.svg-circle-bg {
+  fill: none;
+}
+
+.svg-circle {
+  fill: none;
+}
+
+.svg-circle-text {
+  font-size: 2rem;
+  text-anchor: middle;
+  fill: #fff;
+  font-weight: bold;
 }
