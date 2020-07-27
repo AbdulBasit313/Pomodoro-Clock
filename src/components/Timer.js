@@ -2,18 +2,19 @@ import React from 'react';
 
 import useTimer from '../hooks/useTimer';
 import { formatTime } from '../utils';
+import Break from './Break';
 
 
 const Timer = () => {
-  const { timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, increaseSessionTime, decreaseSessionTime } = useTimer(1500)
+  const { timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, increaseSessionTime, decreaseSessionTime } = useTimer(10)
 
   return (
-    <div>
-      <div className="app">
+    <div style={{ textAlign: 'center' }}>
+      <div>
         <h3>React Stopwatch</h3>
-        <div className='stopwatch-card'>
-          <p>{formatTime(timer)}</p>
-          <div className='buttons'>
+        <div>
+          <p style={timer <= 60 ? { color: 'red' } : { color: 'green' }}>{formatTime(timer)}</p>
+          <div>
             {
               !isActive && !isPaused ?
                 <button onClick={handleStart}>Start</button>
@@ -28,9 +29,18 @@ const Timer = () => {
       </div>
       <div>
         <h2>Session length</h2>
-        <button onClick={increaseSessionTime} disabled={isActive}>Increment</button>
-        <button onClick={decreaseSessionTime} disabled={isActive}>Decrement</button>
+        <button
+          onClick={increaseSessionTime} disabled={isActive || timer >= 3600}
+        >
+          Increment
+        </button>
+        <button
+          onClick={decreaseSessionTime} disabled={isActive || timer <= 0}
+        >
+          Decrement
+        </button>
       </div>
+      <Break />
     </div>
   );
 }

@@ -11,7 +11,10 @@ const useTimer = (initialState = 1500) => {
     setIsActive(true)
     setIsPaused(true)
     increment.current = setInterval(() => {
-      setTimer((timer) => timer - 1)
+      if (timer > 0) {
+        console.log('timer ==>', timer)
+        setTimer((timer) => timer - 1)
+      }
     }, 1000)
   }
 
@@ -22,9 +25,11 @@ const useTimer = (initialState = 1500) => {
 
   const handleResume = () => {
     setIsPaused(true)
-    increment.current = setInterval(() => {
-      setTimer((timer) => timer - 1)
-    }, 1000)
+    if (timer >= 0) {
+      increment.current = setInterval(() => {
+        setTimer((timer) => timer - 1)
+      }, 1000)
+    }
   }
 
   const handleReset = () => {
