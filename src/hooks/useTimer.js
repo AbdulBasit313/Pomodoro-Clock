@@ -20,7 +20,6 @@ const useTimer = (initialState = 1500) => {
   }
 
   useEffect(() => {
-    console.log('handleStart calls ==>', timer)
     if (timer <= 0) {
       clearInterval(increment.current)
       setTimer(0)

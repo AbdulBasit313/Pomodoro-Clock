@@ -7,7 +7,7 @@ import ProgressBar from './ProgressBar';
 
 
 const Timer = () => {
-  const { timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, increaseSessionTime, decreaseSessionTime } = useTimer(90)
+  const { timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, increaseSessionTime, decreaseSessionTime } = useTimer(120)
 
   return (
     <div style={{ textAlign: 'center' }}>
@@ -18,7 +18,7 @@ const Timer = () => {
           size={250}
           strokeWidth={10}
           circleOneStroke='#d9edfe'
-          circleTwoStroke='lightBlue'
+          circleTwoStroke='blue'
         />
         <div>
           <p style={timer <= 60 ? { color: 'red' } : { color: 'green' }}>{formatTime(timer)}</p>

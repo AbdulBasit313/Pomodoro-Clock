@@ -14,7 +14,6 @@ const Break = () => {
   }
 
   useEffect(() => {
-    console.log('handleStart calls ==>', breakTime)
     if (breakTime <= 0) {
       // clearInterval(increment.current)
       setBreakTime(0)
