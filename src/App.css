@@ -19,7 +19,8 @@ body {
   border-radius: 10px;
 }
 
-h3 {
+h3,
+h1 {
   color: white;
   text-align: center;
   padding-top: 8px;
@@ -81,4 +82,12 @@ button {
   text-anchor: middle;
   fill: #fff;
   font-weight: bold;
+}
+
+.color-red {
+  font-size: 2rem;
+  text-anchor: middle;
+  fill: red;
+  font-weight: bold;
+  margin-top: 10px;
 }

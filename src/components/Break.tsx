@@ -1,30 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { formatTime } from '../utils'
+import useBreak from '../hooks/useBreak'
 
 const Break = () => {
-  const [breakTime, setBreakTime] = useState(300)
+  const { breakTime, startBreak, increaseBreakTime, decreaseBreakTime } = useBreak(300)
 
-  const increaseBreakTime = () => {
-    setBreakTime((breakTime) => breakTime + 60)
-  }
-
-  const decreaseBreakTime = () => {
-    setBreakTime((breakTime) => breakTime - 60)
-  }
-
-  useEffect(() => {
-    if (breakTime <= 0) {
-      // clearInterval(increment.current)
-      setBreakTime(0)
-    }
-  }, [breakTime])
+  // useEffect(() => {
+  //   if (breakTime <= 0) {
+  //     // @ts-ignore
+  //     clearInterval(increment.current)
+  //     setBreakTime(0)
+  //   }
+  // }, [breakTime])
 
   return (
     <div>
-      <p>{formatTime(breakTime)}</p>
       <div>
         <h2 style={{ color: '#d9edfe' }}>Break length</h2>
+        <p>{formatTime(breakTime)}</p>
+        <button onClick={startBreak}>Start Break</button>
         <button
           onClick={increaseBreakTime} disabled={breakTime >= 3600}
         >

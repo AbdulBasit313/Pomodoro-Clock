@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { formatTime } from '../utils';
 
-// import './ProgressBar.css';
-// let num = 100 / progress
-
-const ProgressBar = (props: any) => {
+const ProgressBar = (props) => {
   const [offset, setOffset] = useState(0);
   const [progressValue, setProgressValue] = useState(0)
   const circleRef = useRef(null);
@@ -14,17 +12,21 @@ const ProgressBar = (props: any) => {
     strokeWidth,
     circleOneStroke,
     circleTwoStroke,
+    breakTime,
+    startBreak
   } = props;
 
   const center = size / 2;
   const radius = size / 2 - strokeWidth / 2;
   const circumference = 2 * Math.PI * radius;
 
-  console.log('circumference', circumference)
-
   useEffect(() => {
     setProgressValue(100 / progress)
   }, [])
+
+  useEffect(() => {
+    startBreak()
+  }, [progress === 0])
 
   useEffect(() => {
     const progressOffset = ((100 - (progress * progressValue)) / 100) * circumference;
@@ -33,8 +35,6 @@ const ProgressBar = (props: any) => {
     circleRef.current.style = 'transition: stroke-dashoffset 850ms ease-in-out';
 
   }, [setOffset, progress, circumference, offset]);
-
-  console.log('offset', offset)
 
   return (
     <>
@@ -60,15 +60,13 @@ const ProgressBar = (props: any) => {
           r={radius}
           strokeWidth={strokeWidth}
           strokeDasharray={circumference}
-          // strokeDasharray={753.9822368615503}
-          // strokeDashoffset={offset}
           strokeDashoffset={offset} // full 0 // 753.9822368615503
         />
         <text
           x={`${center}`}
           y={`${center}`}
-          className="svg-circle-text">
-          {progress}%
+          className={progress <= 60 ? 'color-red' : 'svg-circle-text'}>
+          {!progress <= 0 ? formatTime(progress) : formatTime(breakTime)}
         </text>
       </svg>
     </>

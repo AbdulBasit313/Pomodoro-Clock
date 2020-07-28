@@ -1,27 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import useTimer from '../hooks/useTimer';
-import { formatTime } from '../utils';
 import Break from './Break';
 import ProgressBar from './ProgressBar';
+import useTimer from '../hooks/useTimer';
+import useBreak from '../hooks/useBreak';
+import { formatTime } from '../utils';
 
 
 const Timer = () => {
-  const { timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, increaseSessionTime, decreaseSessionTime } = useTimer(120)
+  const { timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, increaseSessionTime, decreaseSessionTime } = useTimer(10)
+  const { breakTime, startBreak } = useBreak(300)
 
   return (
     <div style={{ textAlign: 'center' }}>
       <div>
-        <h3>React Pomodoro</h3>
+        <h1>React Pomodoro</h1>
         <ProgressBar
           progress={timer}
+          breakTime={breakTime}
+          startBreak={startBreak}
           size={250}
           strokeWidth={10}
           circleOneStroke='#d9edfe'
-          circleTwoStroke='blue'
+          circleTwoStroke='#5392D5'
         />
         <div>
-          <p style={timer <= 60 ? { color: 'red' } : { color: 'green' }}>{formatTime(timer)}</p>
           <div>
             {
               !isActive && !isPaused ?
@@ -37,6 +40,7 @@ const Timer = () => {
       </div>
       <div>
         <h2 style={{ color: '#d9edfe' }}>Session length</h2>
+        <p style={timer <= 60 ? { color: 'red' } : null}> {formatTime(timer)}</p>
         <button
           onClick={increaseSessionTime} disabled={isActive || timer >= 3600}
         >
