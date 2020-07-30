@@ -1,18 +1,18 @@
-import { useState, useRef, useEffect, useContext } from 'react';
-
-import { TimerContext } from '../context/TimerContext';
+import React, { createContext, useState, useRef, useEffect } from 'react';
 
 
-const useTimer = (initialState = 1500) => {
-  const values = useContext(TimerContext)
-  const [timer, setTimer] = useState(initialState)
+export const TimerContext = createContext()
+
+
+const TimerContextProvider = ({ children }) => {
+  const [timer, setTimer] = useState(70)
   const [sessionLength, setSessionLength] = useState(1500)
   const [isActive, setIsActive] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const increment = useRef(null)
 
 
-  console.log('PomodoroClock values', values)
+  // console.log('PomodoroClock values', values)
 
   const decrementTimer = () => {
     increment.current = setInterval(() => {
@@ -60,18 +60,14 @@ const useTimer = (initialState = 1500) => {
     setTimer((timer) => timer - 60)
   }
 
-  return {
-    timer,
-    sessionLength,
-    isActive,
-    isPaused,
-    handleStart,
-    handlePause,
-    handleResume,
-    handleReset,
-    increaseSessionTime,
-    decreaseSessionTime
-  }
+
+  return (
+    <TimerContext.Provider value={{
+      timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, sessionLength, increaseSessionTime, decreaseSessionTime
+    }}>
+      {children}
+    </TimerContext.Provider>
+  )
 }
 
-export default useTimer
+export default TimerContextProvider

@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+
 import { formatTime } from '../utils';
 
 const ProgressBar = (props) => {
   const [offset, setOffset] = useState(0);
   const [progressValue, setProgressValue] = useState(0)
   const circleRef = useRef(null);
+
   const {
     size,
     progress,
@@ -16,6 +18,8 @@ const ProgressBar = (props) => {
     startBreak
   } = props;
 
+  console.log('progress', progress)
+
   const center = size / 2;
   const radius = size / 2 - strokeWidth / 2;
   const circumference = 2 * Math.PI * radius;
@@ -24,14 +28,14 @@ const ProgressBar = (props) => {
     setProgressValue(100 / progress)
   }, [])
 
-  useEffect(() => {
-    startBreak()
-  }, [progress === 0])
+  // useEffect(() => {
+  //   startBreak()
+  // }, [progress === 0])
 
   useEffect(() => {
     const progressOffset = ((100 - (progress * progressValue)) / 100) * circumference;
     setOffset(progressOffset);
-    // @ts-ignore
+
     circleRef.current.style = 'transition: stroke-dashoffset 850ms ease-in-out';
 
   }, [setOffset, progress, circumference, offset]);

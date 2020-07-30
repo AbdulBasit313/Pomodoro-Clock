@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
-import Break from './Break';
 import ProgressBar from './ProgressBar';
-import useTimer from '../hooks/useTimer';
+import { TimerContext } from '../context/TimerContext';
 import useBreak from '../hooks/useBreak';
-import { formatTime } from '../utils';
+import beep from '../assets/audio/beep.wav'
 
 
 const Timer = () => {
-  const { timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, increaseSessionTime, decreaseSessionTime } = useTimer(10)
+  const {
+    timer, handleStart, isActive, isPaused, handlePause, handleResume, handleReset
+  } = useContext(TimerContext)
   const { breakTime, startBreak } = useBreak(300)
+  const audio = useRef(null)
+
+  useEffect(() => {
+    if (timer === 60) {
+      audio.current.play()
+    }
+  }, [timer])
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <div>
-        <h1>React Pomodoro</h1>
+    <>
+      <div style={{ textAlign: 'center' }}>
         <ProgressBar
           progress={timer}
           breakTime={breakTime}
@@ -24,38 +31,29 @@ const Timer = () => {
           circleOneStroke='#d9edfe'
           circleTwoStroke='#5392D5'
         />
+        <audio
+          id='beep'
+          ref={audio}
+          src={beep}
+        />
         <div>
-          <div>
-            {
-              !isActive && !isPaused ?
-                <button onClick={handleStart}>Start</button>
-                : (
-                  isPaused ? <button onClick={handlePause}>Pause</button> :
-                    <button onClick={handleResume}>Resume</button>
-                )
-            }
-            <button onClick={handleReset} disabled={!isActive}>Reset</button>
-          </div>
+          {
+            !isActive && !isPaused ?
+              <button onClick={handleStart}>Start</button>
+              : (
+                isPaused ? <button onClick={handlePause}>Pause</button> :
+                  <button onClick={handleResume}>Resume</button>
+              )
+          }
+          <button onClick={handleReset} disabled={!isActive}>Reset</button>
         </div>
       </div>
-      <div>
-        <h2 style={{ color: '#d9edfe' }}>Session length</h2>
-        <p style={timer <= 60 ? { color: 'red' } : null}> {formatTime(timer)}</p>
-        <button
-          onClick={increaseSessionTime} disabled={isActive || timer >= 3600}
-        >
-          Increment
-        </button>
-        <button
-          onClick={decreaseSessionTime} disabled={isActive || timer <= 0}
-        >
-          Decrement
-        </button>
-      </div>
-      <Break />
-    </div>
+    </>
   );
 }
 
 
 export default Timer;
+
+{/* <p style={timer <= 60 ? { color: 'red' } : null}> {formatTime(timer)}</p> */ }
+// src='https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav'
