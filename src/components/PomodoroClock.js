@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import Break from './Break';
 import Session from './Session';
@@ -12,7 +12,7 @@ const PomodoroClock = () => {
       <h1>React Pomodoro</h1>
       <div>
         <Timer />
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Session />
           <Break />
         </div>

@@ -5,7 +5,7 @@ export const TimerContext = createContext()
 
 
 const TimerContextProvider = ({ children }) => {
-  const [timer, setTimer] = useState(70)
+  const [timer, setTimer] = useState(5)
   const [sessionLength, setSessionLength] = useState(1500)
   const [isActive, setIsActive] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
@@ -63,7 +63,7 @@ const TimerContextProvider = ({ children }) => {
 
   return (
     <TimerContext.Provider value={{
-      timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, sessionLength, increaseSessionTime, decreaseSessionTime
+      timer, setTimer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, sessionLength, increaseSessionTime, decreaseSessionTime
     }}>
       {children}
     </TimerContext.Provider>

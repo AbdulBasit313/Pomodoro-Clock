@@ -15,7 +15,9 @@ const ProgressBar = (props) => {
     circleOneStroke,
     circleTwoStroke,
     breakTime,
-    startBreak
+    setTimer,
+    startBreak,
+    handleReset
   } = props;
 
   console.log('progress', progress)
@@ -28,9 +30,13 @@ const ProgressBar = (props) => {
     setProgressValue(100 / progress)
   }, [])
 
-  // useEffect(() => {
-  //   startBreak()
-  // }, [progress === 0])
+  useEffect(() => {
+    if (progress === 0) {
+      startBreak()
+      handleReset()
+    }
+  }, [progress])
+
 
   useEffect(() => {
     const progressOffset = ((100 - (progress * progressValue)) / 100) * circumference;
@@ -70,6 +76,7 @@ const ProgressBar = (props) => {
           x={`${center}`}
           y={`${center}`}
           className={progress <= 60 ? 'color-red' : 'svg-circle-text'}>
+          {/* {formatTime(progress)} */}
           {!progress <= 0 ? formatTime(progress) : formatTime(breakTime)}
         </text>
       </svg>
