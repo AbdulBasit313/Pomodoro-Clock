@@ -1,8 +1,9 @@
 import React from 'react';
 
 import PomodoroClock from './components/PomodoroClock';
-import './App.css';
 import TimerContextProvider from './context/TimerContext';
+import './App.css';
+
 
 function App() {
   return (

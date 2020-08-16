@@ -1,66 +1,115 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
 
-body {
-  margin: 0;
-  font-family: "Quicksand", sans-serif;
-  /* background-color: #eceff1; */
-  background-color: #38444c;
-  /* color: #010b40; */
+:root {
+  --main-bg-color: "";
+  --icon-color: "";
+  --green: "";
+  --red: "";
+  --white: "";
+  --black: "";
 }
 
-.app {
-  /* background-color: #0e4d92; */
+body {
+  font-family: "Quicksand", sans-serif;
   background-color: #38444c;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+#timer-label {
+  font-size: 24px;
+  font-weight: normal;
+  letter-spacing: 1.5px;
+}
+
+#start_stop,
+#reset {
+  font-size: 24 px;
+  border: 0.5px solid #ccc;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: #000;
+  letter-spacing: 1.5px;
+  outline: none;
+}
+
+#time-left {
+  font-size: 30px;
+  letter-spacing: 1.5px;
+}
+
+#session-label,
+#break-label {
+  font-size: 18px;
+  letter-spacing: 1.5px;
+}
+
+#session-length,
+#break-length {
+  font-size: 30px;
+  letter-spacing: 1.5px;
+}
+
+.sessions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.handler {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.timer {
+  margin-top: 30px;
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 15px;
+  width: 270px;
+}
+
+#session-increment,
+#break-increment,
+#session-decrement,
+#break-decrement {
+  font-size: 20px;
+  outline: none;
+  border: 0;
+  border-radius: 3px;
+  width: 30px;
+  margin: 5px;
+}
+
+/* .app { */
+/* background-color: #0e4d92; */
+/* background-color: #38444c;
   margin: 0 auto;
   width: 300px;
   height: 200px;
   position: relative;
-  border-radius: 10px;
-}
+  border-radius: 10px; */
+/* } */
 
-h3,
+/* h3,
 h1 {
   color: white;
   text-align: center;
-  /* padding-top: 8px; */
-  /* letter-spacing: 1.2px; */
+  padding-top: 8px;
+  letter-spacing: 1.2px;
   font-weight: 500;
 }
 
 p {
   font-size: 28px;
   font-family: "Special Elite", cursive;
-}
+} */
 
-.stopwatch-card {
-  position: absolute;
+.center {
   text-align: center;
-  background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 325px;
-  height: 130px;
-  top: 110px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-button {
-  outline: none;
-  background: transparent;
-  border: 1px solid #fff;
-  padding: 5px 10px;
-  border-radius: 7px;
-  color: #fff;
-  cursor: pointer;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-evenly;
-  width: 150px;
-  margin: 0 auto;
-  margin-top: 5px;
 }
 
 .svg {
