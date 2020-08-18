@@ -14,10 +14,6 @@ const ProgressBar = (props) => {
     strokeWidth,
     circleOneStroke,
     circleTwoStroke,
-    breakTime,
-    setTimer,
-    startBreak,
-    handleReset
   } = props;
 
   console.log('progress', progress)
@@ -28,14 +24,7 @@ const ProgressBar = (props) => {
 
   useEffect(() => {
     setProgressValue(100 / progress)
-  }, [])
-
-  useEffect(() => {
-    if (progress === 0) {
-      startBreak()
-      handleReset()
-    }
-  }, [progress])
+  }, [progressValue])
 
 
   useEffect(() => {
@@ -45,6 +34,8 @@ const ProgressBar = (props) => {
     circleRef.current.style = 'transition: stroke-dashoffset 850ms ease-in-out';
 
   }, [setOffset, progress, circumference, offset]);
+
+  console.log('offset ==>', offset)
 
   return (
     <>
@@ -76,8 +67,7 @@ const ProgressBar = (props) => {
           x={`${center}`}
           y={`${center}`}
           className={progress <= 60 ? 'color-red' : 'svg-circle-text'}>
-          {/* {formatTime(progress)} */}
-          {!progress <= 0 ? formatTime(progress) : formatTime(breakTime)}
+          {formatTime(progress)}
         </text>
       </svg>
     </>

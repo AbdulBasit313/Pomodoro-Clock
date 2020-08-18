@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 
 import SetTimer from './SetTimer';
-import { formatTime } from '../utils';
 
 import beep from '../assets/audio/beep.wav'
 import { useTimer } from '../context/TimerContext';
+import ProgressBar from './ProgressBar';
 
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const PomodoroClock = () => {
   const {
@@ -31,21 +33,11 @@ const PomodoroClock = () => {
       // @ts-ignore
       // clearInterval(increment.current)
       setCurrentTimer(currentTimer === 'Session' ? 'Break' : 'Session')
-      // setClockTimer(currentTimer === 'Session' ? breakLength : sessionLength * 60)
       setClockTimer(currentTimer === 'Session' ? breakLength * 60 : sessionLength * 60)
+      // setClockTimer(currentTimer === 'Session' ? breakLength : sessionLength * 60)
     }
   }, [clockTimer])
 
-  // useEffect(() => {
-  //   if (clockTimer === 0) {
-  //     setTimeout(() => {
-  //       // @ts-ignore
-  //       // clearInterval(increment.current)
-  //       setCurrentTimer(currentTimer === 'Session' ? 'Break' : 'Session')
-  //       setClockTimer(currentTimer === 'Session' ? breakLength * 60 : sessionLength * 60)
-  //     }, 1000)
-  //   }
-  // }, [clockTimer])
 
   useEffect(() => {
     if (clockTimer === 0) {
@@ -63,7 +55,14 @@ const PomodoroClock = () => {
           src={beep}
         />
         <p id='timer-label'>{currentTimer}</p>
-        <p id='time-left' style={clockTimer <= 60 ? { color: '#CD5C5C' } : { color: '#00FA9A' }}>{formatTime(clockTimer)}</p>
+        <ProgressBar
+          progress={clockTimer}
+          size={200}
+          strokeWidth={10}
+          circleOneStroke='#1B2934'
+          circleTwoStroke='#7ea9e1'
+        />
+        {/* <p id='time-left' style={clockTimer <= 60 ? { color: '#CD5C5C' } : { color: '#00FA9A' }}>{formatTime(clockTimer)}</p> */}
         <div className='handler'>
           <button id='start_stop' onClick={!isActive ? handleStart : handlePause}>
             {!isActive ? 'Start' : 'pause'}
@@ -90,16 +89,13 @@ const PomodoroClock = () => {
 
 export default PomodoroClock
 
-
-// return (
-  //   <div className='center'>
-  //     <h1>React Pomodoro</h1>
-  //     <div>
-  //       <Timer />
-  //       <div style={{ display: 'flex', justifyContent: 'center' }}>
-  //         <Session />
-  //         <Break />
-  //       </div>
-  //     </div>
-  //   </div>
-  // )
+  // useEffect(() => {
+  //   if (clockTimer === 0) {
+  //     setTimeout(() => {
+  //       // @ts-ignore
+  //       // clearInterval(increment.current)
+  //       setCurrentTimer(currentTimer === 'Session' ? 'Break' : 'Session')
+  //       setClockTimer(currentTimer === 'Session' ? breakLength * 60 : sessionLength * 60)
+  //     }, 1000)
+  //   }
+  // }, [clockTimer])

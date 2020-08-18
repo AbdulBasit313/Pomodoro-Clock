@@ -42,24 +42,29 @@ export const useTimer = () => useContext(TimerContext)
 
 const TimerContextProvider: FC<Props> = ({ children }) => {
   const [currentTimer, setCurrentTimer] = useState('Session')
-  const [clockTimer, setClockTimer] = useState(25 * 60)
-  // const [clockTimer, setClockTimer] = useState(5)
+  // const [clockTimer, setClockTimer] = useState(25 * 60)
+  const [clockTimer, setClockTimer] = useState(5)
   const [sessionLength, setSessionLength] = useState(25)
   const [breakLength, setBreakLength] = useState(5)
   const [isActive, setIsActive] = useState(false)
-  const increment = useRef(null)
+  const increment = useRef<HTMLElement>(null)
+  // const increment = useRef() as React.MutableRefObject<HTMLDivElement | null>(null)
   const audio = useRef(null)
 
   const decrementTimer = () => {
-    // @ts-ignore
+    // if (increment && increment.current) {
+    // @ts-ignore  
     increment.current = setInterval(() => {
       setClockTimer((clockTimer) => clockTimer - 1)
     }, 1000)
+    // }
   }
 
   const handleStart = () => {
-    // @ts-ignore
+    // if (increment && increment.current) {
+    // @ts-ignore  
     clearInterval(increment.current)
+    // }
     setIsActive(true)
     decrementTimer()
   }

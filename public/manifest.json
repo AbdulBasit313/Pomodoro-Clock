@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Pomodoro Clock",
+  "name": "Pomodoro Clock",
+  "scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +20,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#333",
   "background_color": "#ffffff"
 }

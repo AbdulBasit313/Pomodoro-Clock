@@ -57,11 +57,13 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 18px;
 }
 
 .handler {
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 20px;
 }
 
 .timer {
@@ -127,16 +129,33 @@ p {
 }
 
 .svg-circle-text {
-  font-size: 2rem;
+  font-size: 30px;
+  letter-spacing: 1.5px;
+  /* font-size: 2rem; */
   text-anchor: middle;
-  fill: #fff;
-  font-weight: bold;
+  fill: #00fa9a;
+  /* font-weight: bold; */
 }
 
 .color-red {
-  font-size: 2rem;
+  font-size: 30px;
+  letter-spacing: 1.5px;
+  /* font-size: 2rem; */
   text-anchor: middle;
-  fill: red;
-  font-weight: bold;
+  fill: #cd5c5c;
+  /* font-weight: bold; */
   margin-top: 10px;
+}
+
+.CircularProgressbar-path {
+  stroke: red;
+}
+.CircularProgressbar-trail {
+  stroke: gray;
+}
+.CircularProgressbar-text {
+  fill: yellow;
+}
+.CircularProgressbar-background {
+  fill: green;
 }
