@@ -55,9 +55,17 @@ body {
 
 .sessions {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
   margin-top: 18px;
+}
+
+.sessions p {
+  margin-bottom: 2px;
+}
+
+.timer__handlers {
+  text-align: center;
 }
 
 .handler {
@@ -86,30 +94,6 @@ body {
   margin: 5px;
 }
 
-/* .app { */
-/* background-color: #0e4d92; */
-/* background-color: #38444c;
-  margin: 0 auto;
-  width: 300px;
-  height: 200px;
-  position: relative;
-  border-radius: 10px; */
-/* } */
-
-/* h3,
-h1 {
-  color: white;
-  text-align: center;
-  padding-top: 8px;
-  letter-spacing: 1.2px;
-  font-weight: 500;
-}
-
-p {
-  font-size: 28px;
-  font-family: "Special Elite", cursive;
-} */
-
 .center {
   text-align: center;
 }
@@ -131,19 +115,15 @@ p {
 .svg-circle-text {
   font-size: 30px;
   letter-spacing: 1.5px;
-  /* font-size: 2rem; */
   text-anchor: middle;
   fill: #00fa9a;
-  /* font-weight: bold; */
 }
 
 .color-red {
   font-size: 30px;
   letter-spacing: 1.5px;
-  /* font-size: 2rem; */
   text-anchor: middle;
   fill: #cd5c5c;
-  /* font-weight: bold; */
   margin-top: 10px;
 }
 
@@ -158,4 +138,11 @@ p {
 }
 .CircularProgressbar-background {
   fill: green;
+}
+
+@media only screen and (min-width: 400px) {
+  .sessions {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }

@@ -11,6 +11,7 @@ interface TimerContextProps {
   sessionLength: number,
   breakLength: number,
   isActive: boolean,
+  audio: string,
   handleStart: () => void,
   handlePause: () => void,
   handleReset: () => void,
@@ -27,7 +28,7 @@ export const TimerContext = createContext<TimerContextProps>({
   // setClockTimer: () => { },
   sessionLength: 0,
   breakLength: 0,
-  // audio: '',
+  audio: '',
   isActive: false,
   handleStart: () => { },
   handlePause: () => { },
@@ -42,23 +43,29 @@ export const useTimer = () => useContext(TimerContext)
 
 const TimerContextProvider: FC<Props> = ({ children }) => {
   const [currentTimer, setCurrentTimer] = useState('Session')
-  // const [clockTimer, setClockTimer] = useState(25 * 60)
-  const [clockTimer, setClockTimer] = useState(5)
+  const [clockTimer, setClockTimer] = useState(25 * 60)
   const [sessionLength, setSessionLength] = useState(25)
   const [breakLength, setBreakLength] = useState(5)
   const [isActive, setIsActive] = useState(false)
-  const increment = useRef<HTMLElement>(null)
-  // const increment = useRef() as React.MutableRefObject<HTMLDivElement | null>(null)
+  const increment = useRef<HTMLElement | null>()
   const audio = useRef(null)
 
+  // React.MutableRefObject<number | null>.current: number | null
+
   const decrementTimer = () => {
-    // if (increment && increment.current) {
-    // @ts-ignore  
+    // @ts-ignore
     increment.current = setInterval(() => {
       setClockTimer((clockTimer) => clockTimer - 1)
     }, 1000)
-    // }
   }
+  // const decrementTimer = () => {
+  //   const id  = setInterval(() => {
+  //     setClockTimer((clockTimer) => clockTimer - 1)
+  //     }, 1000)
+  //       if (increment.current) {
+  //         increment.current = id
+  //   }
+  // }
 
   const handleStart = () => {
     // if (increment && increment.current) {
@@ -133,6 +140,7 @@ const TimerContextProvider: FC<Props> = ({ children }) => {
       setClockTimer,
       sessionLength,
       breakLength,
+      // @ts-ignore
       audio,
       isActive,
       handleStart,

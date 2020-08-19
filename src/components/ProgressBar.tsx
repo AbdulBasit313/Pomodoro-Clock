@@ -1,9 +1,20 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, FC } from 'react';
 import PropTypes from 'prop-types';
 
 import { formatTime } from '../utils';
 
-const ProgressBar = (props) => {
+interface ProgressbarProps {
+  size: number
+  progress: number
+  strokeWidth: number
+  circleOneStroke: string
+  circleTwoStroke: string
+  currentTimer: string
+  sessionLength: number
+  breakLength: number
+}
+
+const ProgressBar: FC<ProgressbarProps> = (props) => {
   const [offset, setOffset] = useState(0);
   const [progressValue, setProgressValue] = useState(0)
   const circleRef = useRef(null);
@@ -14,9 +25,11 @@ const ProgressBar = (props) => {
     strokeWidth,
     circleOneStroke,
     circleTwoStroke,
+    currentTimer,
+    sessionLength,
+    breakLength
   } = props;
 
-  console.log('progress', progress)
 
   const center = size / 2;
   const radius = size / 2 - strokeWidth / 2;
@@ -24,18 +37,17 @@ const ProgressBar = (props) => {
 
   useEffect(() => {
     setProgressValue(100 / progress)
-  }, [progressValue])
+  }, [progressValue, currentTimer, sessionLength, breakLength])
 
 
   useEffect(() => {
     const progressOffset = ((100 - (progress * progressValue)) / 100) * circumference;
     setOffset(progressOffset);
-
+    // @ts-ignore
     circleRef.current.style = 'transition: stroke-dashoffset 850ms ease-in-out';
 
   }, [setOffset, progress, circumference, offset]);
 
-  console.log('offset ==>', offset)
 
   return (
     <>
